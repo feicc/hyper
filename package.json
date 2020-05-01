@@ -13,7 +13,9 @@
     "postinstall": "electron-builder install-app-deps && yarn run rebuild-node-pty",
     "rebuild-node-pty": "electron-rebuild -f -w app/node_modules/node-pty -m app",
     "dist": "yarn run build && cross-env BABEL_ENV=production babel --out-file app/renderer/bundle.js --no-comments --minified app/renderer/bundle.js && build",
-    "clean": "node ./bin/rimraf-standalone.js node_modules && node ./bin/rimraf-standalone.js ./app/node_modules && node ./bin/rimraf-standalone.js ./app/renderer"
+    "clean": "node ./bin/rimraf-standalone.js node_modules && node ./bin/rimraf-standalone.js ./app/node_modules && node ./bin/rimraf-standalone.js ./app/renderer",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "xo": {
     "extends": "xo-react",
@@ -80,7 +82,7 @@
     "appId": "co.zeit.hyper",
     "extraResources": "./bin/yarn-standalone.js",
     "linux": {
-     "category": "TerminalEmulator",
+      "category": "TerminalEmulator",
       "target": [
         {
           "target": "deb",
@@ -135,7 +137,8 @@
     "runes": "0.4.2",
     "seamless-immutable": "7.1.2",
     "semver": "5.4.1",
-    "uuid": "3.1.0"
+    "uuid": "3.1.0",
+    "snyk": "^1.316.1"
   },
   "devDependencies": {
     "ava": "0.22.0",
@@ -159,5 +162,6 @@
     "spectron": "3.7.2",
     "webpack": "3.5.5",
     "xo": "0.18.2"
-  }
+  },
+  "snyk": true
 }
